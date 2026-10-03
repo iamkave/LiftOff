@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiftOff</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nouislider@15.8.1/dist/nouislider.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Orbitron:wght@400..900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <audio src="crash.ogg" id="crashAudio" volume="0.5"></audio>
+    <section class="control">
+        <h2>LiftOff</h2>
+        <div>
+            <p>Speed: <span id="speedReadout">0</span></p>
+            <canvas id="speedGraph" width="400" height="130"></canvas>
+            <p>TWR: <span id="twrReadout">0</span></p>
+            <canvas id="twrGraph" width="400" height="130"></canvas>
+            <p>Altitude: <span id="altReadout">0</span></p>
+            <p>Fuel: <span id="fuelReadout">0</span></p>
+        </div>
+        <div id="throttleWrap">
+            <label for="throttle">Throttle</label>
+            <input name="throttle" type="range" id="throttle" min="0" max="100" value="0">
+        </div>
+        <div>
+            <button id="launch">Launch</button>
+            <button id="reset">Reset</button>
+        </div>
+    </section>
+    <section class="canvas">
+        <canvas id="c" width="400" height="600"></canvas>
+    </section>
+    <dialog id="result">
+        <div class="button-wrap">
+            <h3 style="text-transform: capitalize;" id="resultMsg"></h3>
+            <button id="resultClose">Close</button>
+        </div>
+    </dialog>
+    <dialog id="simDialog">
+        <div>
+            <h3>Define Your Rocket</h3>
+            <label for="drymass">Dry Mass</label>
+            <input name="drymass" type="range" id="dryMassSlider" value="500" max="5000" min="100">
+            <label for="fuel">Fuel in Tank</label>
+            <input name="fuel" type="range" id="fuelSlider" value="1500" min="0" max="100000">
+            <label for="tmax">Max Engine Thrust</label>
+            <input name="tmax" type="range" id="tMaxSlider" value="30000" min="1000" max="100000">
+            <label for="isp">Isp</label>
+            <input name="isp" type="range" id="ispSlider" value="300" min="150" max="450">
+
+            <label for="grav">Gravity</label>
+            <select id="gravitySelect" name="grav">
+                <option value="9.81">Earth (9.81)</option>
+                <option value="1.62">Moon (1.62)</option>
+                <option value="3.71">Mars (3.71)</option>
+                <option value="8.87">Venus (8.87)</option>
+            </select>
+        </div>
+        <div class="button-wrap">
+            <button id="simulate">Simulate</button>
+        </div>
+    </dialog>
+    <p id="toast"></p>
+    <script src="https://cdn.jsdelivr.net/npm/nouislider@15.8.1/dist/nouislider.min.js"></script>
+    <script src="physics.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
